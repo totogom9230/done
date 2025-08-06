@@ -369,6 +369,43 @@ function hideDeleteConfirm() {
     // Remove all long-pressing class
     document.querySelectorAll('.star.long-pressing').forEach(el => el.classList.remove('long-pressing'));
 }
+
+// Month delete modal logic
+function showMonthDeleteConfirm() {
+    document.getElementById('month-delete-modal').style.display = 'flex';
+}
+function hideMonthDeleteConfirm() {
+    document.getElementById('month-delete-modal').style.display = 'none';
+}
+
+function deleteCurrentMonthStars() {
+    const currentMonthKey = `${currentYear}-${currentMonth + 1}`;
+    const keysToDelete = [];
+    
+    // Find all keys for the current month
+    Object.keys(starDates).forEach(key => {
+        if (key.startsWith(currentMonthKey)) {
+            keysToDelete.push(key);
+        }
+    });
+    
+    // Delete all stars and scores for the current month
+    keysToDelete.forEach(key => {
+        delete starDates[key];
+        delete scores[key];
+    });
+    
+    // Save the updated data
+    setStarDates(starDates);
+    setScores(scores);
+    
+    // Re-render the calendar
+    renderCalendar(currentYear, currentMonth);
+    
+    // Hide the modal
+    hideMonthDeleteConfirm();
+}
+
 document.getElementById('confirm-delete').addEventListener('click', function() {
     if (deleteKeyToRemove) {
         delete starDates[deleteKeyToRemove];
@@ -381,6 +418,17 @@ document.getElementById('confirm-delete').addEventListener('click', function() {
 });
 document.getElementById('cancel-delete').addEventListener('click', function() {
     hideDeleteConfirm();
+});
+
+// Month delete event listeners
+document.getElementById('confirm-month-delete').addEventListener('click', deleteCurrentMonthStars);
+document.getElementById('cancel-month-delete').addEventListener('click', hideMonthDeleteConfirm);
+
+// Close month delete modal when clicking outside
+document.getElementById('month-delete-modal').addEventListener('click', function(e) {
+    if (e.target === this) {
+        hideMonthDeleteConfirm();
+    }
 });
 
 // Event listeners
@@ -420,6 +468,9 @@ document.addEventListener('DOMContentLoaded', function() {
             renderCalendar(currentYear, currentMonth);
         });
     }
+
+    // Eraser button
+    document.getElementById('eraser-btn').addEventListener('click', showMonthDeleteConfirm);
 
     // Roulette event listeners
     document.getElementById('spin-btn').addEventListener('click', startSpinning);

@@ -240,10 +240,13 @@ function renderCalendar(year, month) {
             const img = document.createElement('img');
             img.src = starImgUrl;
             img.className = 'star';
-            img.style.width = '32px';
-            img.style.height = '32px';
+            // Responsive star size
+            const isMobile = window.innerWidth <= 768;
+            const isSmallMobile = window.innerWidth <= 480;
+            img.style.width = isSmallMobile ? '16px' : isMobile ? '20px' : '24px';
+            img.style.height = isSmallMobile ? '16px' : isMobile ? '20px' : '24px';
             img.style.display = 'block';
-            img.style.margin = '6px auto 0 auto';
+            img.style.margin = isSmallMobile ? '1px auto 0 auto' : isMobile ? '2px auto 0 auto' : '4px auto 0 auto';
             img.style.cursor = 'pointer';
             img.style.transition = 'transform 0.2s';
             img.style.filter = 'drop-shadow(1px 1px 2px rgba(0,0,0,0.2))';

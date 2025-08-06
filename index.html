@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="#FFD700">
+    <title>반짝반짝 칭찬별</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="title-row">
+            <h1 class="main-title modern-title">
+                <span class="star-text">반짝반짝 칭찬별</span>
+                <img src="data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpolygon points='20,3 25,15 38,15 27,23 31,36 20,28 9,36 13,23 2,15 15,15' fill='%23FFD700' stroke='%23E6B800' stroke-width='2'/%3E%3C/svg%3E" alt="Star" class="modern-star">
+            </h1>
+            <div class="title-divider"></div>
+            <div class="child-selectors">
+                <button class="child-btn" id="child1-btn"><span id="child1-name"></span></button>
+                <button class="child-btn" id="child2-btn"><span id="child2-name"></span></button>
+                <input type="text" id="child1-input" class="child-input" maxlength="10" placeholder="이름 입력" style="display:none;">
+                <input type="text" id="child2-input" class="child-input" maxlength="10" placeholder="이름 입력" style="display:none;">
+            </div>
+        </div>
+    </header>
+    <main>
+        <div id="calendar-container">
+            <div id="calendar-header">
+                <button id="prev-month" aria-label="이전 달">&#8592;</button>
+                <select id="year-select"></select>
+                <select id="month-select"></select>
+                <button id="next-month" aria-label="다음 달">&#8594;</button>
+            </div>
+            <div id="button-container"></div>
+        </div>
+    </main>
+    <div id="confirm-modal">
+        <div class="confirm-box">
+            <div>별과 점수를 삭제할까요?</div>
+            <div class="confirm-btns">
+                <button id="confirm-delete">삭제</button>
+                <button id="cancel-delete">취소</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Star Roulette Modal -->
+    <div id="roulette-modal" class="modal">
+        <div class="modal-content">
+            <h2>별 룰렛!</h2>
+            <div id="roulette-container">
+                <div id="roulette-wheel">
+                    <div class="roulette-item" data-score="500">
+                        <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23FFD700'><path d='M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z'/></svg>" alt="Gold Star" class="gold-star">
+                        <span>황금별 (500점)</span>
+                    </div>
+                    <div class="roulette-item" data-score="100">
+                        <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23C0C0C0'><path d='M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z'/></svg>" alt="Silver Star" class="silver-star">
+                        <span>은별 (100점)</span>
+                    </div>
+                    <div class="roulette-item" data-score="0">
+                        <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23CD7F32'><path d='M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z'/></svg>" alt="Bronze Star" class="bronze-star">
+                        <span>동별 (0점)</span>
+                    </div>
+                </div>
+            </div>
+            <div class="roulette-controls">
+                <button id="spin-btn">Spin!</button>
+                <button id="stop-btn" disabled>Stop</button>
+            </div>
+            <div id="score-display"></div>
+            <button id="close-roulette">닫기</button>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>

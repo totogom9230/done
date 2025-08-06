@@ -205,16 +205,20 @@ function renderCalendar(year, month) {
     const calendar = document.createElement('div');
     calendar.className = 'calendar';
 
+    // Create day names container
+    const dayNamesContainer = document.createElement('div');
+    dayNamesContainer.className = 'day-names';
+    
     // Day names
     const days = ['일', '월', '화', '수', '목', '금', '토'];
     days.forEach(day => {
         const dayElem = document.createElement('div');
         dayElem.textContent = day;
-        dayElem.style.fontWeight = 'bold';
-        dayElem.style.background = 'none';
-        dayElem.style.color = '#1e3c72';
-        calendar.appendChild(dayElem);
+        dayElem.className = 'day-name';
+        dayNamesContainer.appendChild(dayElem);
     });
+    
+    calendar.appendChild(dayNamesContainer);
 
     const firstDay = new Date(year, month, 1).getDay();
     const lastDate = new Date(year, month + 1, 0).getDate();
@@ -222,6 +226,7 @@ function renderCalendar(year, month) {
     // Empty slots before first day
     for (let i = 0; i < firstDay; i++) {
         const empty = document.createElement('div');
+        empty.className = 'calendar-day empty';
         calendar.appendChild(empty);
     }
 

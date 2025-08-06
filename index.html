@@ -6,117 +6,185 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="mobile-web-app-capable" content="yes">
-    <meta name="theme-color" content="#FFD700">
+    <meta name="theme-color" content="#6366f1">
     <title>반짝반짝 칭찬별</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header>
-        <div class="title-row">
-            <div class="title-section">
-                <h1 class="main-title modern-title">
-                    <span class="star-text">반짝반짝 칭찬별</span>
-                    <img src="data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpolygon points='20,3 25,15 38,15 27,23 31,36 20,28 9,36 13,23 2,15 15,15' fill='%23FFD700' stroke='%23E6B800' stroke-width='2'/%3E%3C/svg%3E" alt="Star" class="modern-star">
+    <div class="app-container">
+        <!-- Header -->
+        <header class="app-header">
+            <div class="header-content">
+                <h1 class="app-title">
+                    <span class="title-text">반짝반짝 칭찬별</span>
+                    <div class="title-star">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" fill="#fbbf24"/>
+                        </svg>
+                    </div>
                 </h1>
             </div>
-        </div>
-    </header>
-    <main>
-        <div id="calendar-container">
-            <div class="name-section">
-                <div class="child-selectors">
-                    <button class="child-btn" id="child1-btn"><span id="child1-name"></span></button>
-                    <button class="child-btn" id="child2-btn"><span id="child2-name"></span></button>
-                    <input type="text" id="child1-input" class="child-input" maxlength="10" placeholder="이름 입력" style="display:none;">
-                    <input type="text" id="child2-input" class="child-input" maxlength="10" placeholder="이름 입력" style="display:none;">
+        </header>
+
+        <!-- Main Content -->
+        <main class="app-main">
+            <div class="main-container">
+                <!-- Child Selector -->
+                <div class="child-selector">
+                    <div class="selector-container">
+                        <button class="child-btn" id="child1-btn">
+                            <span id="child1-name"></span>
+                        </button>
+                        <button class="child-btn" id="child2-btn">
+                            <span id="child2-name"></span>
+                        </button>
+                        <input type="text" id="child1-input" class="child-input" maxlength="10" placeholder="이름 입력" style="display:none;">
+                        <input type="text" id="child2-input" class="child-input" maxlength="10" placeholder="이름 입력" style="display:none;">
+                    </div>
+                </div>
+
+                <!-- Calendar Section -->
+                <div class="calendar-section">
+                    <div class="calendar-header">
+                        <div class="calendar-controls">
+                            <button id="prev-month" class="control-btn">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </button>
+                            <div class="date-selector">
+                                <select id="year-select" class="date-select"></select>
+                                <select id="month-select" class="date-select"></select>
+                            </div>
+                            <button id="next-month" class="control-btn">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </button>
+                        </div>
+                        <button id="eraser-btn" class="eraser-btn" title="이번 달 별 전체 삭제">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M3 6h18M8 6V4a2 2 0 012-2h4a2 2 0 012 2v2m3 0v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6h14z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </button>
+                    </div>
+                    
+                    <div id="calendar-container" class="calendar-container">
+                        <!-- Calendar will be rendered here -->
+                    </div>
+                    
+                    <div id="button-container" class="action-container">
+                        <!-- Action button will be rendered here -->
+                    </div>
                 </div>
             </div>
-            <div id="calendar-header">
-                <button id="prev-month" aria-label="이전 달">&#8592;</button>
-                <select id="year-select"></select>
-                <select id="month-select"></select>
-                <button id="next-month" aria-label="다음 달">&#8594;</button>
-                <button id="eraser-btn" aria-label="이번 달 별 삭제" title="이번 달 별 전체 삭제">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M15 3H9V5H3V7H5V19C5 20.1 5.9 21 7 21H17C18.1 21 19 20.1 19 19V7H21V5H15V3ZM7 7H17V19H7V7ZM9 9V17H11V9H9ZM13 9V17H15V9H13Z" fill="currentColor"/>
-                    </svg>
-                </button>
+        </main>
+    </div>
+
+    <!-- Modals -->
+    <div id="confirm-modal" class="modal">
+        <div class="modal-overlay"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>별 삭제</h3>
             </div>
-            <div id="button-container"></div>
-        </div>
-    </main>
-    <div id="confirm-modal">
-        <div class="confirm-box">
-            <div>별과 점수를 삭제할까요?</div>
-            <div class="confirm-btns">
-                <button id="confirm-delete">삭제</button>
-                <button id="cancel-delete">취소</button>
+            <div class="modal-body">
+                <p>별과 점수를 삭제할까요?</p>
+            </div>
+            <div class="modal-footer">
+                <button id="cancel-delete" class="btn btn-secondary">취소</button>
+                <button id="confirm-delete" class="btn btn-danger">삭제</button>
             </div>
         </div>
     </div>
-    
-    <!-- Month Delete Confirm Modal -->
+
     <div id="month-delete-modal" class="modal">
+        <div class="modal-overlay"></div>
         <div class="modal-content">
-            <h2>이번 달 별 삭제</h2>
-            <div class="month-delete-message">
+            <div class="modal-header">
+                <h3>이번 달 별 삭제</h3>
+            </div>
+            <div class="modal-body">
                 <p>이번 달의 모든 별과 점수를 삭제하시겠습니까?</p>
                 <p class="warning-text">⚠️ 이 작업은 되돌릴 수 없습니다!</p>
             </div>
-            <div class="month-delete-btns">
-                <button id="confirm-month-delete" class="delete-btn">전체 삭제</button>
-                <button id="cancel-month-delete" class="cancel-btn">취소</button>
+            <div class="modal-footer">
+                <button id="cancel-month-delete" class="btn btn-secondary">취소</button>
+                <button id="confirm-month-delete" class="btn btn-danger">전체 삭제</button>
             </div>
         </div>
     </div>
-    
-    <!-- Star Roulette Modal -->
-    <div id="roulette-modal" class="modal">
-        <div class="modal-content">
-            <h2>별 룰렛!</h2>
-            <div id="roulette-selection">
-                <div class="selection-buttons">
-                    <button id="delete-star-btn" class="selection-btn delete-btn">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M15 3H9V5H3V7H5V19C5 20.1 5.9 21 7 21H17C18.1 21 19 20.1 19 19V7H21V5H15V3ZM7 7H17V19H7V7ZM9 9V17H11V9H9ZM13 9V17H15V9H13Z" fill="currentColor"/>
-                        </svg>
-                        <span>별 삭제</span>
-                    </button>
-                    <button id="play-roulette-btn" class="selection-btn roulette-btn">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" fill="currentColor"/>
-                        </svg>
-                        <span>별 룰렛!</span>
-                    </button>
-                </div>
-            </div>
-            <div id="roulette-container" style="display: none;">
-                <div id="roulette-wheel">
-                    <div class="roulette-item" data-score="500">
-                        <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23FFD700'><path d='M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z'/></svg>" alt="Gold Star" class="gold-star">
-                        <span>황금별 (500점)</span>
-                    </div>
-                    <div class="roulette-item" data-score="100">
-                        <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23C0C0C0'><path d='M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z'/></svg>" alt="Silver Star" class="silver-star">
-                        <span>은별 (100점)</span>
-                    </div>
-                    <div class="roulette-item" data-score="0">
-                        <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23CD7F32'><path d='M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z'/></svg>" alt="Bronze Star" class="bronze-star">
-                        <span>동별 (0점)</span>
-                    </div>
-                </div>
-            </div>
-            <div class="roulette-controls" style="display: none;">
-                <button id="spin-btn">Spin!</button>
-                <button id="stop-btn" disabled>Stop</button>
-            </div>
-            <div id="score-display"></div>
-            <button id="close-roulette">닫기</button>
-        </div>
-    </div>
-    
 
-    
+    <div id="roulette-modal" class="modal">
+        <div class="modal-overlay"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>별 룰렛!</h3>
+            </div>
+            <div class="modal-body">
+                <div id="roulette-selection" class="roulette-selection">
+                    <div class="selection-grid">
+                        <button id="delete-star-btn" class="selection-card delete-card">
+                            <div class="card-icon">
+                                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M3 6h18M8 6V4a2 2 0 012-2h4a2 2 0 012 2v2m3 0v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6h14z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </div>
+                            <span class="card-text">별 삭제</span>
+                        </button>
+                        <button id="play-roulette-btn" class="selection-card roulette-card">
+                            <div class="card-icon">
+                                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" fill="currentColor"/>
+                                </svg>
+                            </div>
+                            <span class="card-text">별 룰렛!</span>
+                        </button>
+                    </div>
+                </div>
+                
+                <div id="roulette-container" class="roulette-container" style="display: none;">
+                    <div id="roulette-wheel" class="roulette-wheel">
+                        <div class="roulette-item" data-score="500">
+                            <div class="item-icon gold">
+                                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" fill="#fbbf24"/>
+                                </svg>
+                            </div>
+                            <span class="item-text">황금별 (500점)</span>
+                        </div>
+                        <div class="roulette-item" data-score="100">
+                            <div class="item-icon silver">
+                                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" fill="#9ca3af"/>
+                                </svg>
+                            </div>
+                            <span class="item-text">은별 (100점)</span>
+                        </div>
+                        <div class="roulette-item" data-score="0">
+                            <div class="item-icon bronze">
+                                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" fill="#d97706"/>
+                                </svg>
+                            </div>
+                            <span class="item-text">동별 (0점)</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="roulette-controls" style="display: none;">
+                    <button id="spin-btn" class="btn btn-primary">Spin!</button>
+                    <button id="stop-btn" class="btn btn-secondary" disabled>Stop</button>
+                </div>
+                
+                <div id="score-display" class="score-display"></div>
+            </div>
+            <div class="modal-footer">
+                <button id="close-roulette" class="btn btn-secondary">닫기</button>
+            </div>
+        </div>
+    </div>
+
     <script src="script.js"></script>
 </body>
 </html>

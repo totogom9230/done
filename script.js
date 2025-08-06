@@ -1,3 +1,64 @@
+// Sound effects using Web Audio API
+let audioContext = null;
+
+function initAudioContext() {
+    if (!audioContext) {
+        try {
+            audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        } catch (e) {
+            console.log('Web Audio API not supported');
+        }
+    }
+}
+
+function playStarSound() {
+    initAudioContext();
+    if (!audioContext) return;
+    
+    try {
+        const oscillator = audioContext.createOscillator();
+        const gainNode = audioContext.createGain();
+        
+        oscillator.connect(gainNode);
+        gainNode.connect(audioContext.destination);
+        
+        oscillator.frequency.setValueAtTime(800, audioContext.currentTime);
+        oscillator.frequency.exponentialRampToValueAtTime(1200, audioContext.currentTime + 0.1);
+        
+        gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+        gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.2);
+        
+        oscillator.start(audioContext.currentTime);
+        oscillator.stop(audioContext.currentTime + 0.2);
+    } catch (e) {
+        console.log('Sound play failed:', e);
+    }
+}
+
+function playDeleteSound() {
+    initAudioContext();
+    if (!audioContext) return;
+    
+    try {
+        const oscillator = audioContext.createOscillator();
+        const gainNode = audioContext.createGain();
+        
+        oscillator.connect(gainNode);
+        gainNode.connect(audioContext.destination);
+        
+        oscillator.frequency.setValueAtTime(400, audioContext.currentTime);
+        oscillator.frequency.exponentialRampToValueAtTime(200, audioContext.currentTime + 0.15);
+        
+        gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+        gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.15);
+        
+        oscillator.start(audioContext.currentTime);
+        oscillator.stop(audioContext.currentTime + 0.15);
+    } catch (e) {
+        console.log('Sound play failed:', e);
+    }
+}
+
 // Calendar rendering and logic
 const calendarContainer = document.getElementById('calendar-container');
 const calendarHeader = document.getElementById('calendar-header');
@@ -279,6 +340,7 @@ function markDone() {
     setStarDates(starDates);
     renderCalendar(selectedDate.year, selectedDate.month);
     hideButton();
+    playStarSound(); // Play sound when star is added
 }
 
 // Roulette functions
@@ -402,6 +464,11 @@ function deleteCurrentMonthStars() {
     // Re-render the calendar
     renderCalendar(currentYear, currentMonth);
     
+    // Play delete sound if any stars were deleted
+    if (keysToDelete.length > 0) {
+        playDeleteSound();
+    }
+    
     // Hide the modal
     hideMonthDeleteConfirm();
 }
@@ -413,6 +480,7 @@ document.getElementById('confirm-delete').addEventListener('click', function() {
         setStarDates(starDates);
         setScores(scores);
         renderCalendar(currentYear, currentMonth);
+        playDeleteSound(); // Play sound when star is deleted
     }
     hideDeleteConfirm();
 });
@@ -433,6 +501,12 @@ document.getElementById('month-delete-modal').addEventListener('click', function
 
 // Event listeners
 document.addEventListener('DOMContentLoaded', function() {
+    // Initialize audio context on first user interaction
+    document.addEventListener('click', function initAudioOnFirstClick() {
+        initAudioContext();
+        document.removeEventListener('click', initAudioOnFirstClick);
+    }, { once: true });
+    
     loadChildNames();
     switchChild(0);
     // Initial render: show this month

@@ -74,7 +74,23 @@
     <div id="roulette-modal" class="modal">
         <div class="modal-content">
             <h2>별 룰렛!</h2>
-            <div id="roulette-container">
+            <div id="roulette-selection">
+                <div class="selection-buttons">
+                    <button id="delete-star-btn" class="selection-btn delete-btn">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M15 3H9V5H3V7H5V19C5 20.1 5.9 21 7 21H17C18.1 21 19 20.1 19 19V7H21V5H15V3ZM7 7H17V19H7V7ZM9 9V17H11V9H9ZM13 9V17H15V9H13Z" fill="currentColor"/>
+                        </svg>
+                        <span>별 삭제</span>
+                    </button>
+                    <button id="play-roulette-btn" class="selection-btn roulette-btn">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" fill="currentColor"/>
+                        </svg>
+                        <span>별 룰렛!</span>
+                    </button>
+                </div>
+            </div>
+            <div id="roulette-container" style="display: none;">
                 <div id="roulette-wheel">
                     <div class="roulette-item" data-score="500">
                         <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23FFD700'><path d='M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z'/></svg>" alt="Gold Star" class="gold-star">
@@ -90,7 +106,7 @@
                     </div>
                 </div>
             </div>
-            <div class="roulette-controls">
+            <div class="roulette-controls" style="display: none;">
                 <button id="spin-btn">Spin!</button>
                 <button id="stop-btn" disabled>Stop</button>
             </div>

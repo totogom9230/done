@@ -240,6 +240,70 @@ header h1 {
     text-shadow: 2px 2px 4px rgba(255, 215, 0, 0.3);
 }
 
+#roulette-selection {
+    margin: 24px 0;
+    padding: 20px;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(240, 248, 255, 0.8) 100%);
+    border-radius: 16px;
+    box-shadow: inset 0 2px 8px rgba(0,0,0,0.1);
+    border: 2px solid #FFD700;
+}
+
+.selection-buttons {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+}
+
+.selection-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding: 20px 24px;
+    border: none;
+    border-radius: 16px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    min-width: 120px;
+    min-height: 100px;
+    justify-content: center;
+}
+
+.selection-btn svg {
+    width: 32px;
+    height: 32px;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+}
+
+.selection-btn.delete-btn {
+    background: linear-gradient(135deg, #ff6b6b 0%, #ee5a52 100%);
+    color: #fff;
+    box-shadow: 0 4px 16px rgba(255, 107, 107, 0.3);
+}
+
+.selection-btn.delete-btn:hover {
+    background: linear-gradient(135deg, #ee5a52 0%, #ff6b6b 100%);
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(255, 107, 107, 0.4);
+}
+
+.selection-btn.roulette-btn {
+    background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+    color: #fff;
+    box-shadow: 0 4px 16px rgba(76, 175, 80, 0.3);
+}
+
+.selection-btn.roulette-btn:hover {
+    background: linear-gradient(135deg, #45a049 0%, #4CAF50 100%);
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(76, 175, 80, 0.4);
+}
+
 #roulette-container {
     margin: 24px 0;
     padding: 20px;
@@ -1085,6 +1149,22 @@ header h1 {
     width: 99vw;
     max-width: 99vw;
   }
+  .selection-buttons {
+    gap: 12px;
+  }
+  
+  .selection-btn {
+    padding: 16px 20px;
+    min-width: 100px;
+    min-height: 80px;
+    font-size: 1rem;
+  }
+  
+  .selection-btn svg {
+    width: 28px;
+    height: 28px;
+  }
+  
   .roulette-item img {
     width: 22px;
     height: 22px;

@@ -349,6 +349,22 @@ function openRoulette(dateKey) {
     const modal = document.getElementById('roulette-modal');
     modal.style.display = 'block';
     
+    // Show selection screen first
+    showSelectionScreen();
+}
+
+function showSelectionScreen() {
+    document.getElementById('roulette-selection').style.display = 'block';
+    document.getElementById('roulette-container').style.display = 'none';
+    document.querySelector('.roulette-controls').style.display = 'none';
+    document.getElementById('score-display').textContent = '';
+}
+
+function showRouletteGame() {
+    document.getElementById('roulette-selection').style.display = 'none';
+    document.getElementById('roulette-container').style.display = 'block';
+    document.querySelector('.roulette-controls').style.display = 'flex';
+    
     // Reset roulette state
     document.getElementById('spin-btn').disabled = false;
     document.getElementById('stop-btn').disabled = true;
@@ -358,6 +374,26 @@ function openRoulette(dateKey) {
     document.querySelectorAll('.roulette-item').forEach(item => {
         item.classList.remove('highlight');
     });
+}
+
+function deleteStarFromRoulette() {
+    if (!currentRouletteDate) return;
+    
+    // Delete the star and score
+    delete starDates[currentRouletteDate];
+    delete scores[currentRouletteDate];
+    setStarDates(starDates);
+    setScores(scores);
+    
+    // Re-render calendar
+    const [year, month, date] = currentRouletteDate.split('-');
+    renderCalendar(parseInt(year), parseInt(month) - 1);
+    
+    // Play delete sound
+    playDeleteSound();
+    
+    // Close modal
+    closeRoulette();
 }
 
 function closeRoulette() {
@@ -547,6 +583,8 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('eraser-btn').addEventListener('click', showMonthDeleteConfirm);
 
     // Roulette event listeners
+    document.getElementById('delete-star-btn').addEventListener('click', deleteStarFromRoulette);
+    document.getElementById('play-roulette-btn').addEventListener('click', showRouletteGame);
     document.getElementById('spin-btn').addEventListener('click', startSpinning);
     document.getElementById('stop-btn').addEventListener('click', stopSpinning);
     document.getElementById('close-roulette').addEventListener('click', closeRoulette);

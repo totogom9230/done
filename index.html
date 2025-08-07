@@ -73,6 +73,56 @@
                         <!-- Calendar will be rendered here -->
                     </div>
                     
+                    <!-- Summary Section -->
+                    <div class="summary-section">
+                        <div class="summary-container">
+                            <div class="summary-item">
+                                <div class="summary-icon">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" fill="#fbbf24"/>
+                                    </svg>
+                                </div>
+                                <div class="summary-content">
+                                    <div class="summary-label">이번 달 별</div>
+                                    <div class="summary-value" id="month-stars-count">0개</div>
+                                </div>
+                            </div>
+                            <div class="summary-item">
+                                <div class="summary-icon">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </div>
+                                <div class="summary-content">
+                                    <div class="summary-label">이번 달 점수</div>
+                                    <div class="summary-value" id="month-score-total">0점</div>
+                                </div>
+                            </div>
+                            <div class="summary-item">
+                                <div class="summary-icon">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" fill="#fbbf24"/>
+                                    </svg>
+                                </div>
+                                <div class="summary-content">
+                                    <div class="summary-label">총 별</div>
+                                    <div class="summary-value" id="total-stars-count">0개</div>
+                                </div>
+                            </div>
+                            <div class="summary-item">
+                                <div class="summary-icon">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </div>
+                                <div class="summary-content">
+                                    <div class="summary-label">총 점수</div>
+                                    <div class="summary-value" id="total-score-sum">0점</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
                     <div id="button-container" class="action-container">
                         <!-- Action button will be rendered here -->
                     </div>
@@ -151,7 +201,14 @@
                                     <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" fill="#fbbf24"/>
                                 </svg>
                             </div>
-                            <span class="item-text">황금별 (500점)</span>
+                            <div class="item-text">
+                                <span>황금별</span>
+                                <div class="score-input-container">
+                                    <span>(</span>
+                                    <input type="number" class="score-input" value="500" min="0" max="9999">
+                                    <span>)점</span>
+                                </div>
+                            </div>
                         </div>
                         <div class="roulette-item" data-score="100">
                             <div class="item-icon silver">
@@ -159,7 +216,14 @@
                                     <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" fill="#9ca3af"/>
                                 </svg>
                             </div>
-                            <span class="item-text">은별 (100점)</span>
+                            <div class="item-text">
+                                <span>은별</span>
+                                <div class="score-input-container">
+                                    <span>(</span>
+                                    <input type="number" class="score-input" value="100" min="0" max="9999">
+                                    <span>)점</span>
+                                </div>
+                            </div>
                         </div>
                         <div class="roulette-item" data-score="0">
                             <div class="item-icon bronze">
@@ -167,7 +231,14 @@
                                     <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" fill="#d97706"/>
                                 </svg>
                             </div>
-                            <span class="item-text">동별 (0점)</span>
+                            <div class="item-text">
+                                <span>동별</span>
+                                <div class="score-input-container">
+                                    <span>(</span>
+                                    <input type="number" class="score-input" value="0" min="0" max="9999">
+                                    <span>)점</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

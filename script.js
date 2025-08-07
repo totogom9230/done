@@ -131,6 +131,9 @@ function switchChild(idx) {
     starDates = getStarDatesForChild(idx);
     scores = getScoresForChild(idx);
     renderCalendar(currentYear, currentMonth);
+    
+    // Update summary for new child
+    updateSummary();
 }
 
 function handleChildBtnClick(idx) {
@@ -192,6 +195,47 @@ function populateYearMonthSelect(year, month) {
         if (m === month) opt.selected = true;
         monthSelect.appendChild(opt);
     }
+}
+
+function updateSummary() {
+    const starDates = getStarDates();
+    const scores = getScores();
+    
+    // Calculate current month stats for current child
+    const currentMonthKey = `${currentYear}-${currentMonth + 1}`;
+    let monthStarsCount = 0;
+    let monthScoreTotal = 0;
+    
+    Object.keys(starDates).forEach(key => {
+        if (key.startsWith(currentMonthKey)) {
+            monthStarsCount++;
+            monthScoreTotal += scores[key] || 0;
+        }
+    });
+    
+    // Calculate total stats across ALL children
+    let totalStarsCount = 0;
+    let totalScoreSum = 0;
+    
+    // Loop through all children
+    for (let i = 0; i < childNames.length; i++) {
+        const childStarDates = getStarDatesForChild(i);
+        const childScores = getScoresForChild(i);
+        
+        // Add stars count for this child
+        totalStarsCount += Object.keys(childStarDates).length;
+        
+        // Add scores sum for this child
+        Object.values(childScores).forEach(score => {
+            totalScoreSum += score || 0;
+        });
+    }
+    
+    // Update DOM
+    document.getElementById('month-stars-count').textContent = `${monthStarsCount}개`;
+    document.getElementById('month-score-total').textContent = `${monthScoreTotal}점`;
+    document.getElementById('total-stars-count').textContent = `${totalStarsCount}개`;
+    document.getElementById('total-score-sum').textContent = `${totalScoreSum}점`;
 }
 
 function renderCalendar(year, month) {
@@ -308,6 +352,9 @@ function renderCalendar(year, month) {
     }
 
     calendarContainer.appendChild(calendar);
+    
+    // Update summary after rendering calendar
+    updateSummary();
 }
 
 function selectDate(year, month, date, elem) {
@@ -349,6 +396,7 @@ function markDone() {
     renderCalendar(selectedDate.year, selectedDate.month);
     hideButton();
     playStarSound(); // Play sound when star is added
+    updateSummary(); // Update summary after adding star
 }
 
 // Roulette functions
@@ -396,6 +444,9 @@ function deleteStarFromRoulette() {
     // Re-render calendar
     const [year, month, date] = currentRouletteDate.split('-');
     renderCalendar(parseInt(year), parseInt(month) - 1);
+    
+    // Update summary after deleting star
+    updateSummary();
     
     // Play delete sound
     playDeleteSound();
@@ -446,8 +497,10 @@ function stopSpinning() {
     // Get the highlighted item
     const highlightedItem = document.querySelector('.roulette-item.highlight');
     if (highlightedItem) {
-        const score = parseInt(highlightedItem.dataset.score);
-        const starName = highlightedItem.querySelector('span').textContent.split(' ')[0];
+        // Get score from input field instead of data attribute
+        const scoreInput = highlightedItem.querySelector('.score-input');
+        const score = parseInt(scoreInput.value) || 0;
+        const starName = highlightedItem.querySelector('.item-text span').textContent;
         
         // Save score
         scores[currentRouletteDate] = score;
@@ -460,6 +513,7 @@ function stopSpinning() {
         // Re-render calendar to show new score
         const [year, month, date] = currentRouletteDate.split('-');
         renderCalendar(parseInt(year), parseInt(month) - 1);
+        updateSummary(); // Update summary after roulette
     }
 }
 
@@ -513,6 +567,9 @@ function deleteCurrentMonthStars() {
         playDeleteSound();
     }
     
+    // Update summary after deleting stars
+    updateSummary();
+    
     // Hide the modal
     hideMonthDeleteConfirm();
 }
@@ -525,6 +582,7 @@ document.getElementById('confirm-delete').addEventListener('click', function() {
         setScores(scores);
         renderCalendar(currentYear, currentMonth);
         playDeleteSound(); // Play sound when star is deleted
+        updateSummary(); // Update summary after deleting star
     }
     hideDeleteConfirm();
 });
@@ -593,6 +651,17 @@ document.addEventListener('DOMContentLoaded', function() {
     // Roulette event listeners
     document.getElementById('delete-star-btn').addEventListener('click', deleteStarFromRoulette);
     document.getElementById('play-roulette-btn').addEventListener('click', showRouletteGame);
+    
+    // Score input event listeners
+    document.addEventListener('input', function(e) {
+        if (e.target.classList.contains('score-input')) {
+            const rouletteItem = e.target.closest('.roulette-item');
+            if (rouletteItem) {
+                const score = parseInt(e.target.value) || 0;
+                rouletteItem.setAttribute('data-score', score);
+            }
+        }
+    });
     document.getElementById('spin-btn').addEventListener('click', startSpinning);
     document.getElementById('stop-btn').addEventListener('click', stopSpinning);
     document.getElementById('close-roulette').addEventListener('click', closeRoulette);
